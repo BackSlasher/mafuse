@@ -15,4 +15,4 @@
 /tmp/afuse:
     storage:
         mount  : sshfs boredstorage@oneboredadmin.com:~  %m
-        umount : fusermount -u -z %m
+        unmount : fusermount -u -z %m
