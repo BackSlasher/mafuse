@@ -1,0 +1,4 @@
+A project to manage afuse partitions.
+Currently requires:
+* pyyaml
+[sudo?] pip install pyyaml
