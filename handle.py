@@ -6,7 +6,7 @@
 # subdirectory: the short name of the directory to mount / unmount (%r)
 # directory : the fully qualified directory to mount / unmount (%m)
 # action    : whether to mount or unmount. can be 'mount' or 'unmount'
-# usage from afuse (as intended): ./handle.py <file> <afusemount> %r %m <mount/unmount>
+# usage from afuse (as intended): ./handle.py <afusetab> <afusemount> %r %m {mount|unmount}
 
 from __future__ import print_function
 import sys
@@ -15,7 +15,7 @@ import yaml
 import re
 
 if len(sys.argv)!=6:
-    print("Wrong argument count. usage: mount.py <afusetab> <afusemount> <directory> <action>", file=sys.stderr)
+    print("Wrong argument count. usage: handle.py <afusetab> <afusemount> <directory> <action>", file=sys.stderr)
     sys.exit(1)
 elif not os.path.exists(sys.argv[1]):
     print("afusetab not found", file=sys.stderr)
@@ -25,7 +25,7 @@ try:
     with open(sys.argv[1],'r') as f:
         doc = yaml.load(f)
 except:
-    print("afusetab couldn't load", file=sys.stderr)
+    print("couldn't parse afusetab", file=sys.stderr)
     sys.exit(2)
 
 # find the right root, then the right directory
@@ -34,11 +34,8 @@ subdirectory=sys.argv[3]
 directory=sys.argv[4]
 directive=sys.argv[5]
 
-import pprint
-pprint.pprint(sys.argv)
-
-# ignore .Trash
-if re.search("^\.Trash",subdirectory): exit(0)
+# ignore .Trash bug in afuse / Ubuntu
+if re.search("^\.Trash",subdirectory): exit(4)
 
 try:
     command = doc[afusemount][subdirectory][directive]
@@ -48,8 +45,6 @@ except:
 
 command=command.replace('%r',afusemount)
 command=command.replace('%m',directory)
-#print(command)
+print(command)
 
 res = os.system(command)
-#from subprocess import call
-#call(['notify-send',command])
