@@ -1,0 +1,18 @@
+# Comments are allowed
+# dirname	howtomount	howtounmount
+# can use:
+# 	%r for the name of the directory to mount
+# 	%m for where to mount
+#
+# Example:
+#<RootDir>:
+#    <SubDir>:
+#        Mount:   <Command>
+#        UnMount: <Command>
+#
+#
+#
+/tmp/afuse2:
+    storage:
+        mount  : sshfs boredstorage@oneboredadmin.com:/  %m
+        unmount : fusermount -u -z %m
