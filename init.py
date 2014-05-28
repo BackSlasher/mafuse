@@ -22,7 +22,7 @@ try:
     with open(afusetab,'r') as f:
         doc = yaml.load(f)
 except:
-    print("afusetab couldn't load", file=sys.stderr)
+    print("couldn't prase afusetab", file=sys.stderr)
     sys.exit(2)
 
 # script paths:
@@ -36,9 +36,5 @@ for root in doc:
     unmounttemplate='unmount_template=%s %s %s %%r %%m unmount' % (handles,afusetab,root)
     poproottemplate='"populate_root_command=%s %s %s"' % (lists,afusetab,root)
     callarr = ['afuse','-o',mounttemplate,'-o',unmounttemplate,root,'-f']
-    #callarr = ['afuse','-o','mount_template=sshfs boredstorage@oneboredadmin.com:. %m','-o','unmount_template=fusermount -u -z %m',root]
-    #callarr = ['afuse','-o',mounttemplate,'-o',unmounttemplate,'-o',poproottemplate,root]
-    import pprint
-    #pprint.pprint(callarr)
     from subprocess import call
     call(callarr)
