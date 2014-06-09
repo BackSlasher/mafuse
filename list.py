@@ -12,6 +12,8 @@ import os
 import yaml
 import re
 
+#print(sys.argv)
+
 if len(sys.argv)!=3:
     print("Wrong argument count. Usage: list.py <afusetab> <root>", file=sys.stderr)
     sys.exit(1)

@@ -14,6 +14,8 @@ import os
 import yaml
 import re
 
+print(sys.argv)
+
 if len(sys.argv)!=6:
     print("Wrong argument count. usage: handle.py <afusetab> <afusemount> <directory> <action>", file=sys.stderr)
     sys.exit(1)
