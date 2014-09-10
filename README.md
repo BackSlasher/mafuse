@@ -11,7 +11,7 @@ python 2 (I'm using 2.7)
 ## How it works
 The main script, `init.py`, should be called with a path to the YAML config file.  
 `init` then calls `afuse` for each parent directory, and registers the other scripts as callback.  
-`handle` is called for every mount / unmount, and is using the same config file.
+`handle` is called for every mount / unmount, and is using the same config file.  
 `list` is called for directory listing (showing which directories are available), and is using the same config file.
 
 ## Improving / Todo
